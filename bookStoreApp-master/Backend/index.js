@@ -1,4 +1,5 @@
 import express from "express";
+import path from "path";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -30,6 +31,14 @@ try {
 // defining routes
 app.use("/book", bookRoute);
 app.use("/user", userRoute);
+
+// Serve frontend static files
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "../Frontend/dist")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../Frontend/dist/index.html"));
+});
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

@@ -1,0 +1,13 @@
+{
+  "name": "bookstore-fullstack",
+  "version": "1.0.0",
+  "description": "Unified MERN stack deployment for Railway",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "postinstall": "npm install --prefix bookStoreApp-master/Backend && npm install --prefix bookStoreApp-master/Frontend",
+    "build": "npm run build --prefix bookStoreApp-master/Frontend",
+    "start": "npm start --prefix bookStoreApp-master/Backend"
+  }
+}
