@@ -8,6 +8,6 @@
   "scripts": {
     "postinstall": "npm install --prefix bookStoreApp-master/Backend && npm install --prefix bookStoreApp-master/Frontend",
     "build": "npm run build --prefix bookStoreApp-master/Frontend",
-    "start": "npm start --prefix bookStoreApp-master/Backend"
+    "start": "cd bookStoreApp-master/Backend && node index.js"
   }
 }

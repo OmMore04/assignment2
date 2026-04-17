@@ -14,7 +14,7 @@ app.use(express.json());
 
 dotenv.config();
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4001;
 const URI = process.env.MongoDBURI;
 
 // connect to mongoDB
@@ -42,12 +42,16 @@ app.get("/health", (req, res) => {
 
 // Serve frontend static files
 const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "../Frontend/dist")));
+const frontendDistPath = path.join(__dirname, "../Frontend/dist");
+console.log("Serving static files from:", frontendDistPath);
+
+app.use(express.static(frontendDistPath));
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../Frontend/dist/index.html"));
+    res.sendFile(path.join(frontendDistPath, "index.html"));
 });
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
+    console.log("Current working directory:", process.cwd());
 });
