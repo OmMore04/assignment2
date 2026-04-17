@@ -32,6 +32,14 @@ try {
 app.use("/book", bookRoute);
 app.use("/user", userRoute);
 
+// Health check route
+app.get("/health", (req, res) => {
+    res.status(200).json({
+        status: "ok",
+        database: mongoose.connection.readyState === 1 ? "connected" : "disconnected"
+    });
+});
+
 // Serve frontend static files
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "../Frontend/dist")));
