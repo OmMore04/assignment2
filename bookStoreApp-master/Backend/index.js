@@ -17,15 +17,16 @@ dotenv.config();
 const PORT = process.env.PORT || 4001;
 const URI = process.env.MongoDBURI;
 
+if (!URI) {
+    console.error("CRITICAL ERROR: MongoDBURI environment variable is missing!");
+}
+
 // connect to mongoDB
 try {
-    mongoose.connect(URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
-    console.log("Connected to mongoDB");
+    await mongoose.connect(URI);
+    console.log("Connected to mongoDB successfully");
 } catch (error) {
-    console.log("Error: ", error);
+    console.error("FAILED to connect to mongoDB:", error.message);
 }
 
 // defining routes
